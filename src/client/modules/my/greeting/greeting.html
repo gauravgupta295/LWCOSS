@@ -1,0 +1,15 @@
+<template>    
+    <div class="toDo">       
+        <div class="header">           
+       <input type="text" name="txtInput" style="width:50%;margin:10px" class="slds-input"  placeholder="Type Here..."/> 
+       <input type="button" value="Add" onclick={addToList} class="slds-button slds-button_success"/>        
+        </div>
+    <ul style="margin:20px;list-style: decimal;" >
+ <template for:each={todoItems} for:item="list">
+        <li key={list.taskId}>
+          {list.taskDetails}
+        </li>
+      </template>
+      </ul>
+   </div>
+</template>
