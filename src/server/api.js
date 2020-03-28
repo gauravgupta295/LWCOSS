@@ -6,16 +6,22 @@ const express = require('express');
 const app = express();
 app.use(helmet());
 app.use(compression());
-
-const HOST = process.env.API_HOST || 'localhost';
-const PORT = process.env.API_PORT || 3002;
+//app.set('view engine', 'ejs');
+//const HOST = process.env.API_HOST || 'localhost';
+const PORT = process.env.API_PORT || 8080;
 
 app.get('/api/v1/endpoint', (req, res) => {
     res.json({ success: true });
 });
+// set the home page route
+//app.get('/', function(req, res) {
+
+    // ejs render automatically looks in the views folder
+    //res.render('index');
+//});
 
 app.listen(PORT, () =>
     console.log(
-        `✅  API Server started: http://${HOST}:${PORT}/api/v1/endpoint`
+        `✅  API Server started: `
     )
 );
