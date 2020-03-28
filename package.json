@@ -55,21 +55,17 @@
     },
     "repository": "Gaurav Gupta/TEST",
     "scripts": {
-        "build": "lwc-services build -m production",
+        "build": "lwc-services build --mode production",
         "build:development": "lwc-services build",
         "lint": "eslint ./src/**/*.js",
-        "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
-        "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
-         "serve": "node scripts/server.js",
-        "serve:api": "node src/server/api.js",
-        "serve:client": "node scripts/server.js",
+        "prettier": "prettier --write \"**/*.{css,html,js,json,md,yaml,yml}\"",
+        "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,yaml,yml}\"",
+        "serve": "node scripts/server.js",
         "test:unit": "lwc-services test:unit",
         "test:unit:coverage": "lwc-services test:unit --coverage",
         "test:unit:debug": "lwc-services test:unit --debug",
         "test:unit:watch": "lwc-services test:unit --watch",
-        "watch": "run-p watch:client watch:server",
-        "watch:client": "lwc-services watch",
-        "watch:server": "nodemon",
-        "start": "node src/server/api.js"
+        "watch": "lwc-services watch",
+        "watch:production": "lwc-services watch --mode=production"
     }
 }
