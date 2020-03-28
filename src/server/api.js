@@ -7,21 +7,16 @@ const app = express();
 app.use(helmet());
 app.use(compression());
 //app.set('view engine', 'ejs');
-//const HOST = process.env.API_HOST || 'localhost';
-const PORT = process.env.API_PORT || 8080;
+const HOST = process.env.HOST || 'localhost';
+const PORT = process.env.PORT || 3001;
+const DIST_DIR = './dist';
 
-app.get('/api/v1/endpoint', (req, res) => {
-    res.json({ success: true });
+app.use(express.static(DIST_DIR));
+
+app.use('*', (req, res) => {
+    res.sendFile(path.resolve(DIST_DIR, 'index.html'));
 });
-// set the home page route
-//app.get('/', function(req, res) {
-
-    // ejs render automatically looks in the views folder
-    //res.render('index');
-//});
 
 app.listen(PORT, () =>
-    console.log(
-        `✅  API Server started: `
-    )
+    console.log(`✅  Server started: http://${HOST}:${PORT}`)
 );
