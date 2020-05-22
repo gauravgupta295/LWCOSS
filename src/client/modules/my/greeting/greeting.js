@@ -1,15 +1,108 @@
-import { LightningElement,track} from 'lwc';
-export default class Greeting extends LightningElement {
-    
-   @track todoItems = [
-        { taskId: 1, taskDetails: 'Write Story' },
-        { taskId: 2, taskDetails: 'Build Framework' }
-    ];
-    id= 2;
-    addToList() {
-        var item = this.template.querySelector('input').value;
-        this.id= this.id+1;     
-        this.todoItems.push({taskId : this.id, taskDetails : item});
-        this.template.querySelector('input').value = ''
+import {LightningElement, track} from 'lwc';
+import LightningElementSLDS from '../Util/SLDSElement';
+//import {fs} from 'node_modules/@types';
+//const fs = require('fs');
+
+export default class Greeting extends LightningElementSLDS {
+    easyTimer;   
+    closeToast()
+    {
+        this.showMainDiv = false;
     }
+
+    // eslint-disable-next-line no-useless-constructor
+    constructor()
+    {
+        super();
+        this.easyTimer = require('easytimer.js').Timer;
+        this.timer = new this.easyTimer();       
+        this.features = [];
+        let item = {
+            Id: 1,
+            URL: 'https://image.scoopwhoop.com/w694/s4.scoopwhoop.com/anj/emojis/68e1172a-5cb2-442c-bf7a-461273e74bd9.jpg',
+            Title: 'Tip Tip Barsa Pani',
+            Category: 'Song',
+            Zone: 'Bollywood',
+            Hint:'Guess the Bollywood Song',
+            IsVisible : false
+          }; 
+          let item1 = {
+            Id : 2,
+            URL: 'https://image.scoopwhoop.com/w694/s3.scoopwhoop.com/anj/ks/f4ce99c0-8321-4db9-b1c0-34eb3e5f0f14.jpg',
+            Title: 'Tip Tip Barsa Pani',
+            Category: 'Movie',
+            Zone: 'Bollywood',
+            Hint:'Guess the Bollywood Song',
+            IsVisible : false
+          }; 
+          let item2 = {
+            Id : 3,
+            URL: 'https://image.scoopwhoop.com/w694/s3.scoopwhoop.com/anj/emojis/e0151de7-b90c-4fe9-b8c0-d97993fe9958.jpg',
+            Title: 'Tip Tip Barsa Pani',
+            Category: 'Song',
+            Zone: 'Bollywood',
+            Hint:'Guess the Bollywood Song',
+            IsVisible : false
+          }; 
+          let item3 = {
+            Id : 4,
+            URL: 'https://image.scoopwhoop.com/w694/s4.scoopwhoop.com/anj/emojis/ebb6a936-cb41-4f44-9e29-d28009bfcd6f.jpg',
+            Title: 'Tip Tip Barsa Pani',
+            Category: 'Song',
+            Zone: 'Bollywood',
+            Hint:'Guess the Bollywood Song',
+            IsVisible : false
+          }; 
+          
+        this.features.push(item);
+        this.features.push(item1);
+        this.features.push(item2);
+        this.features.push(item3); 
+
+        this.timer.addEventListener('secondsUpdated', function () {
+            this.countdown = this.timer.getTimeValues().toString();
+            this.template.querySelector('.ado').play();
+        }.bind(this));
+
+        this.timer.addEventListener('targetAchieved', function () {
+            this.countdown = 'TIME OUT!!';
+            this.template.querySelector('.ado').pause();
+            this.template.querySelector('.timeOut').play();
+            setTimeout(function(){ 
+                this.template.querySelector('.timeOut').pause(); 
+                //alert('Your Time is out');                     
+                }.bind(this), 1400);  
+        }.bind(this));        
+    }     
+    @track countdown;
+    @track showMainDiv = false;
+    @track features;
+    @track feature = {};
+
+    handlerzonechange(event){
+     this.zoneSelected = event.target.value;        
+    }
+
+    handlercategorychange(event){
+        this.categorySelected = event.target.value;          
+    }
+
+    start(){           
+        this.showMainDiv = true;                   
+        this.startWatch();  
+        this.next();             
+    }      
+
+    next(){          
+        this.feature = this.features.find(function(feature){                 
+            return (feature.Zone === this.zoneSelected && feature.Category === this.categorySelected);
+       }.bind(this)); 
+         this.features.splice(this.features.findIndex(v=>v.Id === this.feature.Id), 1);
+         this.startWatch();  
+    }     
+
+    startWatch() {          
+        this.timer.start({countdown: true, startValues: {seconds: 10}}); 
+        this.countdown = this.timer.getTimeValues().toString()                                                                                                                    
+    }                               
 }
