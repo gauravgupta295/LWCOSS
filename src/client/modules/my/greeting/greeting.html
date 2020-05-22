@@ -1,4 +1,107 @@
 <template>    
+    <div class="row">        
+              <div class="column">
+                <div class="" >
+                    <div style="margin: 10px 30px;width: 40%;">                       
+                        <fieldset style="border: 2px solid #fff;padding: 15px;font-size:20px;">
+                            <legend>Choose Options</legend>                        
+            <div class="row">
+                <div class="column">
+                <fieldset class="slds-form-element">
+                    <legend class="slds-form-element__legend slds-form-element__label">Select Zone</legend>
+                    <div class="slds-form-element__control">
+                      <span class="slds-radio">
+                        <input type="radio" id="Bollywood" value="Bollywood" name="Zone" onchange={handlerzonechange} />
+                        <label class="slds-radio__label" for="Bollywood">
+                          <span class="slds-radio_faux"></span>
+                          <span class="slds-form-element__label">Bollywood</span>
+                        </label>
+                      </span>
+                      <span class="slds-radio">
+                        <input type="radio" id="Other" value="Other" name="Zone" onchange={handlerzonechange} />
+                        <label class="slds-radio__label" for="Other">
+                          <span class="slds-radio_faux"></span>
+                          <span class="slds-form-element__label">Other</span>
+                        </label>
+                      </span>
+                    </div>
+                  </fieldset>    
+                </div>
+                <div class="column">
+                    <fieldset class="slds-form-element">
+                        <legend class="slds-form-element__legend slds-form-element__label">Select Category</legend>
+                        <div class="slds-form-element__control">
+                          <span class="slds-radio">
+                            <input type="radio" id="Movie" value="Movie" name="Category" checked="" onchange={handlercategorychange} />
+                            <label class="slds-radio__label" for="Movie">
+                              <span class="slds-radio_faux"></span>
+                              <span class="slds-form-element__label">Movie</span>
+                            </label>
+                          </span>
+                          <span class="slds-radio">
+                            <input type="radio" id="Song" value="Song" name="Category" onchange={handlercategorychange} />
+                            <label class="slds-radio__label" for="Song">
+                              <span class="slds-radio_faux"></span>
+                              <span class="slds-form-element__label">Song</span>
+                            </label>
+                          </span>
+                        </div>
+                      </fieldset>
+                </div>
+                    </div>
+                </fieldset>
+                  <div class='slds-button slds-button_brand marginSpace' onclick={start}>Start</div> </div>                                    
+                </div>   
+                </div>
+
+                <div class="column">
+                    <div class="demo-only" style="height:58px" if:true={showMainDiv}>
+                        <div class="slds-is-relative" style="margin-top: 15px;">
+                        <div class="slds-notify slds-notify_toast clock" role="status">                      
+                        <div class="slds-icon_container slds-icon-utility-success slds-m-right_small slds-no-flex slds-align-top">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#success"></use>
+                        </svg>
+                    </div>
+                        <div class="slds-notify__content">                                                            
+                                <div>{countdown}</div>
+                            </div>           
+                        
+                        <div class="slds-notify__close">
+                        <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" 
+                            onclick={closeToast}>
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <div class="slds-assistive-text">Close</div>
+                        </button>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div if:true={showMainDiv}>
+                            <div style="height: 440px;
+                            width: 500px;
+                            background: #cfcfd0;">                          
+                                    <img src={feature.URL} key={feature.URL} max-height="440" max-width="500"/>        
+                                    <div style="margin: 5px;cursor:pointer;text-decoration:underline;" class="slds-button">Clue:</div> <label>{feature.Title}</label>
+                            </div>                           
+                            <div class='slds-button slds-button_brand'  style="    margin: 5px 0px;
+                            text-decoration: underline;
+                            width: 500px;
+                            height: 40px;" onclick={next}>Next</div>                              
+                        </div> 
+                
+                    
+                                 
+                      
+                      <div style="display:none;">
+                      <audio class="ado" src="https://www.fesliyanstudios.com/play-mp3/2400" controls="true"></audio>
+                      <audio class="timeOut" src="https://retired.sounddogs.com/previews/25/mp3/228170_SOUNDDOGS__to.mp3" controls="true"></audio>
+                      </div>
+                      </div>
+    </div>
+    <!--
     <div class="toDo">       
         <div class="header">           
        <input type="text" name="txtInput" style="width:50%;margin:10px" class="slds-input"  placeholder="Type Here..."/> 
@@ -11,5 +114,6 @@
         </li>
       </template>
       </ul>
-   </div>
+   </div>-->
+    
 </template>
