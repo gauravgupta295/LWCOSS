@@ -1,10 +1,14 @@
 import {LightningElement, track} from 'lwc';
 import LightningElementSLDS from '../Util/SLDSElement';
+import { objectEach } from 'highcharts';
 //import {fs} from 'node_modules/@types';
 //const fs = require('fs');
 
 export default class App extends LightningElementSLDS {
-    easyTimer;   
+    easyTimer;  
+    @track teamName; 
+    @track teamScores =[];
+    @track teams = []; 
     closeToast()
     {
         this.showMainDiv = false;
@@ -17,6 +21,7 @@ export default class App extends LightningElementSLDS {
         this.easyTimer = require('easytimer.js').Timer;
         this.timer = new this.easyTimer();       
         this.features = [];
+            
         let item = {
             Id: 1,
             URL: 'https://image.scoopwhoop.com/w694/s4.scoopwhoop.com/anj/emojis/68e1172a-5cb2-442c-bf7a-461273e74bd9.jpg',
@@ -59,6 +64,8 @@ export default class App extends LightningElementSLDS {
         this.features.push(item2);
         this.features.push(item3); 
 
+     
+
         this.timer.addEventListener('secondsUpdated', function () {
             this.countdown = this.timer.getTimeValues().toString();
             this.template.querySelector('.ado').play();
@@ -86,19 +93,36 @@ export default class App extends LightningElementSLDS {
     handlercategorychange(event){
         this.categorySelected = event.target.value;          
     }
-
-    start(){           
-        this.showMainDiv = true;                   
-        this.startWatch();  
-        this.next();             
+    
+    handleTeamChange(event)
+    {       
+        this.teamName = event.target.value;     
+    }
+    start(){     
+        this.sequence = 1;                       
+        this.next();     
+        let team = {teamName :this.teamName,points :[]}   
+        this.teamScores.push(team); 
     }      
 
-    next(){          
+    next(){  
+        if(this.sequence > 1)        
+        {                          
+           this.teamScores.filter(function(item){return item.teamName === this.teamName}.bind(this))[0].points.push(5);       
+        }
+        this.sequence++;
         this.feature = this.features.find(function(feature){                 
             return (feature.Zone === this.zoneSelected && feature.Category === this.categorySelected);
        }.bind(this)); 
+       if(this.feature)
+       {
          this.features.splice(this.features.findIndex(v=>v.Id === this.feature.Id), 1);
-         this.startWatch();  
+         this.startWatch(); 
+         this.showMainDiv = true;  
+       }
+       else 
+        this.showMainDiv = false;  
+
     }     
 
     startWatch() {          
