@@ -1,11 +1,15 @@
 <template>
     <div class="row">        
               <div class="column">
-                <div class="" >
-                    <div style="margin: 10px 30px;width: 40%;">                       
-                        <fieldset style="border: 2px solid #fff;padding: 15px;font-size:20px;">
-                            <legend>Choose Options</legend>                        
+                                      
             <div class="row">
+                <div style="width: 50%;" >
+                    <div style="margin: 20px 30px;">     
+                        <div style="margin-bottom: 10px;">
+                         <input class="slds-input" placeholder="Enter Team Name" type="text" name="teamName" onblur={handleTeamChange}>
+                        </div>                  
+                        <fieldset style="border: 2px solid #fff;padding: 15px;font-size:20px;">
+                            <legend>Choose Options</legend> 
                 <div class="column">
                 <fieldset class="slds-form-element">
                     <legend class="slds-form-element__legend slds-form-element__label">Select Zone</legend>
@@ -48,12 +52,34 @@
                         </div>
                       </fieldset>
                 </div>
-                    </div>
-                </fieldset>
-                  <div class='slds-button slds-button_brand marginSpace' onclick={start}>Start</div> </div>                                    
-                </div>   
-                </div>
+            </fieldset>
+            <div class='slds-button slds-button_brand marginSpace' onclick={start}>Start</div> 
+        </div> 
+       
+          </div> 
+        </div>            
 
+                    <div class="row" if:true={teamScores}>                        
+                        <div style="margin: 10px 30px;">
+                            <fieldset style="border: 2px solid #fff;padding: 15px;font-size:20px;">
+                                <legend>Scores</legend> 
+                            <table class="slds-table slds-table--bordered slds-table--striped" border="1">
+                                <template for:each={teamScores} for:item="team">    
+                                    <tr class="row" key={team.teamName}>                                                                                                                                                                                                                                                                         
+                                        <th key={team.teamName} class="column">{team.teamName}</th>                                                                                                       
+                                    <template for:each={team.points} for:item="point" key={team.teamName}>                                                                                                                                                                                                                                  
+                                    <td key={$index} class="column">{point}</td>                                                                                                          
+                            </template>
+                        </tr>                      
+                    </template>
+                        </table>
+                    </fieldset>
+                        </div>      
+                      
+
+                </div>                     
+    </div>
+                
                 <div class="column">
                     <div class="demo-only" style="height:58px" if:true={showMainDiv}>
                         <div class="slds-is-relative" style="margin-top: 15px;">
@@ -82,7 +108,7 @@
                         <div if:true={showMainDiv}>
                             <div style="height: 440px;
                             width: 500px;
-                            background: #cfcfd0;">                          
+                            background: #cfcfd0;" if:true ={feature}>                          
                                     <img src={feature.URL} key={feature.URL} max-height="440" max-width="500"/>        
                                     <div style="margin: 5px;cursor:pointer;text-decoration:underline;" class="slds-button">Clue:</div> <label>{feature.Title}</label>
                             </div>                           
@@ -91,19 +117,11 @@
                             width: 500px;
                             height: 40px;" onclick={next}>Next</div>                              
                         </div> 
-                
-                    
-                                 
-                      
+                        <div if:false={showMainDiv} style="color:red;margin-top:50px">Choose options and start play !</div>                                                                                           
                       <div style="display:none;">
                       <audio class="ado" src="https://www.fesliyanstudios.com/play-mp3/2400" controls="true"></audio>
                       <audio class="timeOut" src="https://retired.sounddogs.com/previews/25/mp3/228170_SOUNDDOGS__to.mp3" controls="true"></audio>
                       </div>
                       </div>
-    </div>
-   
-    
-          
-         
-                    
+    </div>                                              
 </template>
