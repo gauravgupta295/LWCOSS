@@ -1,8 +1,5 @@
 import {LightningElement, track} from 'lwc';
 import LightningElementSLDS from '../Util/SLDSElement';
-import { objectEach } from 'highcharts';
-//import {fs} from 'node_modules/@types';
-//const fs = require('fs');
 
 export default class App extends LightningElementSLDS {
     easyTimer;  
