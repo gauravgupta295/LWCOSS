@@ -59,7 +59,7 @@
           </div> 
         </div>            
 
-                    <div class="row">                        
+                    <div class="row" if:true={teamScores}>                        
                         <div style="margin: 10px 30px;">
                             <fieldset style="border: 2px solid #fff;padding: 15px;font-size:20px;">
                                 <legend>Scores</legend> 
@@ -105,18 +105,44 @@
                         </div>
                         </div>
                         </div>
-                        <div if:true={showMainDiv}>
+                        <div if:true={showMainDiv}>                         
                             <div style="height: 440px;
                             width: 500px;
-                            background: #cfcfd0;" if:true ={feature}>                          
+                            background: #cfcfd0;" if:true ={feature}> 
+                            <div class="flip" onclick={revealAnswer}>
+                            <div class="card" style="height: 400px; width: 500px;"> 
+                              <div class="face front">                          
                                     <img src={feature.URL} key={feature.URL} max-height="440" max-width="500"/>        
-                                    <div style="margin: 5px;cursor:pointer;text-decoration:underline;" class="slds-button">Clue:</div> <label>{feature.Title}</label>
-                            </div>                           
+                              </div> 
+                              <div class="face back" style="height: 400px; width: 500px;">
+                                 <h2>{feature.Title}</h2>                                 
+                                 <div class="slds-form-element__control">
+                                  <div class="slds-radio_button-group" style="padding: 10px;">
+                                    <span class="slds-button slds-radio_button" style="padding: 10px;">
+                                      <input type="radio" name="example-unique-name-99" id="example-unique-id-101" value="Correct" onclick={handleResult} />
+                                      <label style="padding: 10px;" class="slds-radio_button__label" for="example-unique-id-101">
+                                        <span class="slds-radio_faux">Correct</span>
+                                      </label>
+                                    </span>
+                                    <span class="slds-button slds-radio_button" style="padding: 10px;">
+                                      <input type="radio" name="example-unique-name-99" id="example-unique-id-102" value="Wrong" onclick={handleResult} />
+                                      <label  style="padding: 10px;" class="slds-radio_button__label" for="example-unique-id-102">
+                                        <span class="slds-radio_faux">Wrong</span>
+                                      </label>
+                                    </span>
+                                  </div>
+                                 </div>                               
+                              </div>
+                            </div> 
+                          </div>
+                            <div onclick={revealHint} style="margin: 5px;cursor:pointer;text-decoration:underline;" class="slds-button">Clue:</div> 
+                            <label if:true={hintTaken}>{feature.Title}</label>                                                     
                             <div class='slds-button slds-button_brand'  style="    margin: 5px 0px;
                             text-decoration: underline;
                             width: 500px;
                             height: 40px;" onclick={next}>Next</div>                              
                         </div> 
+                        </div>
                         <div if:false={showMainDiv} style="color:red;margin-top:50px">Choose options and start play !</div>
                 
                     
