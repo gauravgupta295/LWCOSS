@@ -40,7 +40,7 @@ export default class App extends LightningElementSLDS {
           let item2 = {
             Id : 3,
             URL: 'https://image.scoopwhoop.com/w694/s3.scoopwhoop.com/anj/emojis/e0151de7-b90c-4fe9-b8c0-d97993fe9958.jpg',
-            Title: 'Tip Tip Barsa Pani',
+            Title: 'Tu Cheez h badi h mast mast',
             Category: 'Song',
             Zone: 'Bollywood',
             Hint:'Guess the Bollywood Song',
@@ -49,7 +49,7 @@ export default class App extends LightningElementSLDS {
           let item3 = {
             Id : 4,
             URL: 'https://image.scoopwhoop.com/w694/s4.scoopwhoop.com/anj/emojis/ebb6a936-cb41-4f44-9e29-d28009bfcd6f.jpg',
-            Title: 'Tip Tip Barsa Pani',
+            Title: 'Tan Tana Tan Tan Taara',
             Category: 'Song',
             Zone: 'Bollywood',
             Hint:'Guess the Bollywood Song',
@@ -82,7 +82,24 @@ export default class App extends LightningElementSLDS {
     @track showMainDiv = false;
     @track features;
     @track feature = {};
-
+    currentScore;
+    @track hintTaken = false;
+    handleResult(event)
+    {
+        if(event.target.value ==='Correct')
+        {            
+         this.currentScore =  this.hintTaken ? 3 : 5; 
+        }
+        else{
+            this.currentScore =  this.hintTaken ? -2 : 0; 
+        }
+        
+    }    
+    revealAnswer()
+    {
+         this.template.querySelector('.card').classList.toggle('flipped');
+         return true;
+    }
     handlerzonechange(event){
      this.zoneSelected = event.target.value;        
     }
@@ -90,7 +107,10 @@ export default class App extends LightningElementSLDS {
     handlercategorychange(event){
         this.categorySelected = event.target.value;          
     }
-    
+    revealHint()
+    {
+        this.hintTaken = true;
+    }
     handleTeamChange(event)
     {       
         this.teamName = event.target.value;     
@@ -102,10 +122,12 @@ export default class App extends LightningElementSLDS {
         this.teamScores.push(team); 
     }      
 
-    next(){  
+    next(){    
+        this.hintTaken = false;    
         if(this.sequence > 1)        
-        {                          
-           this.teamScores.filter(function(item){return item.teamName === this.teamName}.bind(this))[0].points.push(5);       
+        {        
+           this.revealAnswer();                  
+           this.teamScores.filter(function(item){return item.teamName === this.teamName}.bind(this))[0].points.push(this.currentScore);       
         }
         this.sequence++;
         this.feature = this.features.find(function(feature){                 
