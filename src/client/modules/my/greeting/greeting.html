@@ -92,7 +92,7 @@
                         <div class="slds-notify__content">                                                            
                                 <div>{countdown}</div>
                             </div>           
-                        
+                        <span><button class="slds-button" style="color:white;" onclick={startTimer}>Start</button></span>
                         <div class="slds-notify__close">
                         <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" 
                             onclick={closeToast}>
@@ -112,7 +112,7 @@
                             <div class="flip" onclick={revealAnswer}>
                             <div class="card" style="height: 400px; width: 500px;"> 
                               <div class="face front">                          
-                                    <img src={feature.URL} key={feature.URL} max-height="440" max-width="500"/>        
+                                    <img src={feature.URL} key={feature.URL} title="Click to reveal the answer" max-height="440" max-width="500"/>        
                               </div> 
                               <div class="face back" style="height: 400px; width: 500px;">
                                  <h2>{feature.Title}</h2>                                 
