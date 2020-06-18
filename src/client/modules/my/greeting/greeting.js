@@ -94,7 +94,10 @@ export default class App extends LightningElementSLDS {
             this.currentScore =  this.hintTaken ? -2 : 0; 
         }
         
-    }    
+    }   
+   startTimer(){
+        this.startWatch(); 
+    }
     revealAnswer()
     {
          this.template.querySelector('.card').classList.toggle('flipped');
@@ -136,7 +139,7 @@ export default class App extends LightningElementSLDS {
        if(this.feature)
        {
          this.features.splice(this.features.findIndex(v=>v.Id === this.feature.Id), 1);
-         this.startWatch(); 
+        // this.startWatch(); 
          this.showMainDiv = true;  
        }
        else 
@@ -145,7 +148,7 @@ export default class App extends LightningElementSLDS {
     }     
 
     startWatch() {          
-        this.timer.start({countdown: true, startValues: {seconds: 10}}); 
+        this.timer.start({countdown: true, startValues: {seconds: 30}}); 
         this.countdown = this.timer.getTimeValues().toString()                                                                                                                    
     }                               
 }
