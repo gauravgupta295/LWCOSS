@@ -17,8 +17,7 @@ export default class App extends LightningElementSLDS {
         super();
         this.easyTimer = require('easytimer.js').Timer;
         this.timer = new this.easyTimer();       
-        this.features = [];
-            
+        this.features = [];            
         let item = {
             Id: 1,
             URL: 'https://image.scoopwhoop.com/w694/s4.scoopwhoop.com/anj/emojis/68e1172a-5cb2-442c-bf7a-461273e74bd9.jpg',
