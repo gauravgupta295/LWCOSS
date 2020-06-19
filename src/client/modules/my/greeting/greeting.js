@@ -1,5 +1,6 @@
 import {LightningElement, track} from 'lwc';
 import LightningElementSLDS from '../Util/SLDSElement';
+import {listItems , timeLimit} from '../dataContent'
 
 export default class App extends LightningElementSLDS {
     easyTimer;  
@@ -15,6 +16,7 @@ export default class App extends LightningElementSLDS {
     constructor()
     {
         super();
+        alert(timeLimit);
         this.easyTimer = require('easytimer.js').Timer;
         this.timer = new this.easyTimer();       
         this.features = [];            
