@@ -16,7 +16,7 @@ export default class App extends LightningElementSLDS {
     constructor()
     {
         super();
-        alert(timeLimit);
+        alert(timeLimit); 
         this.easyTimer = require('easytimer.js').Timer;
         this.timer = new this.easyTimer();       
         this.features = [];            
